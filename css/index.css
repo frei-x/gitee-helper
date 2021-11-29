@@ -1,0 +1,24 @@
+/* html,
+body {
+  background-color: rgb(221, 216, 209) !important;
+} */
+html {
+  filter: invert(0.95) hue-rotate(180deg) brightness(1.2);
+}
+img,
+.common-header,
+.bottombar,
+.explore-header,
+.explore-statistics,
+.jumbotron,
+.ent-feature-box {
+  filter: invert(0.95) hue-rotate(180deg) brightness(1.2);
+}
+.common-header *,
+.bottombar *,
+.explore-statistics * {
+  filter: none;
+}
+.logo-img {
+  filter: none;
+}
