@@ -67,7 +67,7 @@ const startLoop = () => {
   clearInterval(noticesTimer);
   let hour = new Date().getHours();
   noticesTimer = setInterval(() => {
-    if (hour > 10 && hour <= 19) {
+    if (hour >= 10 && hour < 19) {
       getAllNotices();
       console.count("累计运行次数");
     } else {
