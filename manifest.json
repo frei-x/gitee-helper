@@ -6,6 +6,7 @@
     // "options_page": "html/options.html",
     "background": {
         "scripts": [
+            "js/tool/api.js",
             "js/background.js"
         ],
         "persistent": false
@@ -30,9 +31,11 @@
     ],
     "icons": {},
     "permissions": [
+        "cookies",
         "tabs",
         "notifications",
-        "https://gitee.com/*",
+        "https://*.baidu.com/*",
+        "https://*.gitee.com/*",
         "storage"
     ],
     "incognito": "split",
