@@ -9,7 +9,7 @@
             "js/tool/api.js",
             "js/background.js"
         ],
-        "persistent": false
+        "persistent": true
     },
     "browser_action": {
         "default_title": "gitee helper 配置",
