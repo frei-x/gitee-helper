@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "version_name": "0.1.0",
     "description": "gitee 助手",
+    "homepage_url": "https://gitee.com/stringify/gitee-helper",
     // "options_page": "html/options.html",
     "background": {
         "scripts": [
@@ -24,10 +25,10 @@
                 "https://gitee.com/*"
             ],
             "js": [
-                "js/insert.js"
+                "js/insert-community.js"
             ],
-            "css":["./css/index.css"],
-            "run_at": "document_end"
+            "css":["css/dark.css"],
+            "run_at": "document_start"
         }
         // {
         //     // "matches": ["https://*/*"],
@@ -40,11 +41,17 @@
         //     "run_at": "document_end"
         // }
     ],
+    "web_accessible_resources": ["css/dark.css"],
+    // "web_accessible_resources": [{
+    //     "resources": ["./css/dark.css"],
+    //     "matches": ["https://gitee.com/*"]
+    //   }],
     "icons": {},
     "permissions": [
         "cookies",
         "tabs",
         "notifications",
+        "webNavigation",
         "https://*.gitee.com/*",
         "storage"
     ],

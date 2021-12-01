@@ -6,6 +6,26 @@
 // 判断工作时间、后台执行、执行频率、点击消息打开页面消息详情
 // 用户点击桌面通知详情按钮后, 自动标记已读
 // 通过注入的js 判断页面已登录, 发消息给background.js， 让其继续执行， 否则发现未登录则停止执行， 并且发出通知。
+
+// chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+//   console.log("创建了");
+//   console.log(tab);
+//   var tabUrl = tab.url;
+//   if (/^(https:\/\/gitee\.com)|(search.gitee.com)/.test(tabUrl)) {
+//     chrome.tabs.insertCSS(tab.id, {
+//       file: "css/dark.css",
+//     });
+//   }
+// });
+// chrome.webNavigation.onBeforeNavigate.addListener(function (tab) {
+//   console.log(tab);
+//   var tabUrl = tab.url;
+//   if (/^(https:\/\/gitee\.com)|(search.gitee.com)/.test(tabUrl)) {
+//     chrome.tabs.insertCSS(tab.tabId, {
+//       file: "css/dark.css",
+//     });
+//   }
+// });
 const sendNotification = function ({ message, url, updated_at, messageId }, btnText) {
   const opt = {
     type: "basic",
@@ -28,7 +48,7 @@ const sendNotification = function ({ message, url, updated_at, messageId }, btnT
 };
 chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) => {
   let oInfo = JSON.parse(notificationId);
-  let url = oInfo.url;
+  let url = oInfo.url || "/";
   let messageId = oInfo.messageId;
   chrome.tabs.create({ url: `https://gitee.com${url}`, active: true }, tab => {});
   messageId && markNotice(messageId);
@@ -76,3 +96,6 @@ const startLoop = () => {
   }, INTERVAL);
 };
 startLoop();
+
+// let darkCssUrl = chrome.extension.getURL("css/dark.css");
+// chrome.tabs.insertCSS(null, { file: "css/dark.css" });

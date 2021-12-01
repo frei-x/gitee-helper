@@ -7,12 +7,45 @@
     <!-- <link rel="stylesheet" type="text/css" href="../css/main.css" /> -->
     <!-- <script src="../js/contants.js" charset="utf-8"></script> -->
     <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
+      }
+
+      .gitee-helper-popup {
+        color: #fff;
+        padding: 16px 24px;
+        box-sizing: border-box;
+      }
+
+      .option-item {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+      }
+
+      .option-item__btn {
+        background: #fff;
+        border-color: #fff;
+        font-size: 13px;
+        margin-left: 8px;
+      }
 
     </style>
   </head>
 
   <body>
-    <div class="">
+    <div class="gitee-helper-popup">
+      <div class="option-item">
+        <div class="option-item__title">暗黑主题</div>
+        <button class="option-item__btn option_dark_theme_btn" data-enable="1">已关闭</button>
+      </div>
+
     </div>
   </body>
   <script src="../js/popup.js"></script>
