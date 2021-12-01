@@ -22,7 +22,7 @@ const sendNotification = function ({ message, url, updated_at, messageId }, btnT
       },
     ],
   };
-  chrome.notifications.create(JSON.stringify({ message, updated_at, url, messageId }), opt, e => {
+  chrome.notifications.create(JSON.stringify({updated_at, url, messageId }), opt, e => {
     console.log(e);
   });
 };

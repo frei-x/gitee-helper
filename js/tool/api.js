@@ -44,6 +44,7 @@ const getNotices = function (type) {
 const markNotice = async function (id) {
   // todo 写一个事件总线, 从自定义事件中共享数据
   var token = await getToken();
+  console.log("token: " + token);
   return fetch(`https://gitee.com/notifications/mark`, {
     headers: {
       "x-csrf-token": token,
