@@ -22,7 +22,7 @@ const sendNotification = function ({ message, url, updated_at, messageId }, btnT
       },
     ],
   };
-  chrome.notifications.create(JSON.stringify({updated_at, url, messageId }), opt, e => {
+  chrome.notifications.create(JSON.stringify({ updated_at, url, messageId }), opt, e => {
     console.log(e);
   });
 };
@@ -50,7 +50,7 @@ const getAllNotices = function () {
   Promise.all([getNotices("referer"), getNotices("messages"), getNotices("infos")])
     .then(values => {
       if (values[0].status >= 400) {
-        sendNotification({ message: values[0].message, url: "https://gitee.com/login" }, "去登录");
+        sendNotification({ message: values[0].message, url: "/login" }, "去登录");
         // 暂时不取消轮询. todo: 如果取消轮询 需要判断用户已登录 ,再通知开启轮询
         // clearInterval(noticesTimer);
       } else {

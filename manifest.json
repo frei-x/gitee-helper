@@ -7,6 +7,7 @@
     "background": {
         "scripts": [
             "js/tool/api.js",
+            "js/tool/eventBus.js",
             "js/background.js"
         ],
         "persistent": true
@@ -28,13 +29,22 @@
             "css":["./css/index.css"],
             "run_at": "document_end"
         }
+        // {
+        //     // "matches": ["https://*/*"],
+        //     "matches": [
+        //         "https://gitee.com/login"
+        //     ],
+        //     "js": [
+        //         "js/watch-login.js"
+        //     ],
+        //     "run_at": "document_end"
+        // }
     ],
     "icons": {},
     "permissions": [
         "cookies",
         "tabs",
         "notifications",
-        "https://*.baidu.com/*",
         "https://*.gitee.com/*",
         "storage"
     ],
