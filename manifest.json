@@ -9,7 +9,8 @@
         "scripts": [
             "js/tool/api.js",
             "js/tool/eventBus.js",
-            "js/background.js"
+            "js/background.js",
+            "js/omnibox.js"
         ],
         "persistent": true
     },
@@ -20,40 +21,30 @@
     // 注入页面的js
     "content_scripts": [
         {
-            // "matches": ["https://*/*"],
             "matches": [
                 "https://gitee.com/*"
             ],
             "js": [
                 "js/insert-community.js"
             ],
-            "css":["css/dark.css"],
-            "run_at": "document_start"
+            // "css":["css/dark.css"],
+            "run_at": "document_end"
         }
-        // {
-        //     // "matches": ["https://*/*"],
-        //     "matches": [
-        //         "https://gitee.com/login"
-        //     ],
-        //     "js": [
-        //         "js/watch-login.js"
-        //     ],
-        //     "run_at": "document_end"
-        // }
     ],
-    "web_accessible_resources": ["css/dark.css"],
+    "web_accessible_resources": ["css/dark.css", "img/download.svg"],
     // "web_accessible_resources": [{
     //     "resources": ["./css/dark.css"],
     //     "matches": ["https://gitee.com/*"]
     //   }],
     "icons": {},
+    "omnibox": { "keyword" : "gitee" },
     "permissions": [
-        "cookies",
         "tabs",
         "notifications",
         "webNavigation",
         "https://*.gitee.com/*",
-        "storage"
+        "storage",
+        "downloads"
     ],
     "incognito": "split",
     "manifest_version": 2
