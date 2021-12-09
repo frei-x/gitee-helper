@@ -30,7 +30,7 @@ const sendNotification = function ({ message, url, updated_at, messageId }, btnT
   const opt = {
     type: "basic",
     iconUrl: "../img/favicon.ico",
-    title: "Gitee Notices",
+    title: "Gitee 通知",
     message: message,
     priority: 2, // 优先级，从 -2 到 2，-2 优先级最低，2 最高，默认为零。
     eventTime: new Date(updated_at).getTime(),
