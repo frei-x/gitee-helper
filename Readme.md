@@ -28,7 +28,7 @@
 ### 下载仓库单个文件
 - 仓库目录树右侧添加下载单文件按钮
 - 文件详情页面顶部添加下载按钮
-![输入图片说明](img/example-downlaod.png.png)
+![输入图片说明](img/example-downlaod.png)
 #### todo
 1. 下载单目录
 
