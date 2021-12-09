@@ -3,6 +3,7 @@ function createImgBtn ({ isBlobpage } = {}) {
   const downloadImgURL = chrome.extension.getURL("img/download.svg");
   let oImg = document.createElement("img");
   oImg.src = downloadImgURL;
+  oImg.title = "下载此文件";
   oImg.className = "gitee-helper-download-img";
   isBlobpage && oImg.classList.add("blob-page");
   oImg.style.cssText = "vertical-align: text-top; margin-left: 8px; width: 20px; cursor: pointer;";

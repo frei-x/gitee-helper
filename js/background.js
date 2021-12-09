@@ -56,7 +56,7 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
 const launcher = result => {
   let arr = result.list;
   console.log(result);
-  if (!Array.isArray(arr)) return;
+  if (!Array.isArray(arr) || arr.length === 0) return;
   console.log(arr);
   arr.forEach(item => {
     item.message = item.message ? item.message : item.content;
@@ -109,6 +109,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 // onUpdated在页面初始化时不会执行(刷新页面), url改变才执行
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  console.log(changeInfo);
+  if (!changeInfo.url || changeInfo.url.indexOf("#") > -1) return;
   if (changeInfo.url) {
     chrome.tabs.sendMessage(tabId, {
       type: "url-change",
