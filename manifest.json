@@ -27,7 +27,7 @@
             "js": [
                 "js/insert-community.js"
             ],
-            // "css":["css/dark.css"],
+            "css":["css/dark.css"],
             "run_at": "document_end"
         }
     ],

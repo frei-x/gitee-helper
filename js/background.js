@@ -65,7 +65,7 @@ const launcher = result => {
 };
 
 let noticesTimer = null;
-const INTERVAL = 60000;
+const INTERVAL = 40000;
 const getAllNotices = function () {
   Promise.all([getNotices("referer"), getNotices("messages"), getNotices("infos")])
     .then(values => {
@@ -87,7 +87,7 @@ const startLoop = () => {
   clearInterval(noticesTimer);
   let hour = new Date().getHours();
   noticesTimer = setInterval(() => {
-    if (hour >= 10 && hour < 19) {
+    if (hour >= 9 && hour < 19) {
       getAllNotices();
       console.count("累计运行次数");
     } else {
@@ -97,5 +97,21 @@ const startLoop = () => {
 };
 startLoop();
 
-// let darkCssUrl = chrome.extension.getURL("css/dark.css");
-// chrome.tabs.insertCSS(null, { file: "css/dark.css" });
+// 支持下载单个文件
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.type === "download") {
+    chrome.downloads.download({ url: request.value }, e => {
+      console.log("下载信息: ", e);
+    });
+    return;
+  }
+});
+
+// onUpdated在页面初始化时不会执行(刷新页面), url改变才执行
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  if (changeInfo.url) {
+    chrome.tabs.sendMessage(tabId, {
+      type: "url-change",
+    });
+  }
+});
