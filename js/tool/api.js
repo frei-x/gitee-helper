@@ -1,3 +1,5 @@
+// todo 自动获取用户企业名称、企业路径和企业id
+const enterpressId = "1";
 const getToken = () => {
   return new Promise((resolve, reject) => {
     fetch(`https://gitee.com/login_state`, {
@@ -59,3 +61,65 @@ const markNotice = async function (id) {
     return res.json();
   });
 };
+
+// feat: 混合搜索
+// 搜索 issue
+// 搜索 PR
+// 搜索仓库
+// 搜索代码
+// 搜索里程碑
+// 搜索文档
+// 搜索成员
+const searchIssue = text => {
+  text = text ? text.trim() : "";
+  return fetch(
+    `https://api.gitee.com/enterprises/${enterpressId}/issues/as_tree?page=1&per_page=3&search=${text}&sort=created_at&parent_id=0`,
+    {
+      headers: {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        referer: "https://e.gitee.com/",
+      },
+      method: "GET",
+      credentials: "include",
+    }
+  ).then(res => {
+    return res.json();
+  });
+};
+
+const searchPr = text => {
+  text = text ? text.trim() : "";
+  return fetch(
+    `https://api.gitee.com/enterprises/${enterpressId}/pull_requests?page=1&per_page=2&search=${text}&sort=created_at`,
+    {
+      headers: {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        referer: "https://e.gitee.com/",
+      },
+      method: "GET",
+      credentials: "include",
+    }
+  ).then(res => {
+    return res.json();
+  });
+};
+
+
+// 搜索仓库
+const searchRepo = (text) => {
+  // https://api.gitee.com/enterprises/1/projects?page=1&per_page=20&search=1
+  text = text ? text.trim() : "";
+  return fetch(
+    `https://api.gitee.com/enterprises/${enterpressId}/projects?page=1&per_page=2&search=${text}`,
+    {
+      headers: {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        referer: "https://e.gitee.com/",
+      },
+      method: "GET",
+      credentials: "include",
+    }
+  ).then(res => {
+    return res.json();
+  });
+}
