@@ -22,6 +22,7 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
   let arrSuggest = featKeyword;
   let searchResultIssueSuggestList = [];
   let searchResultPRSuggestList = [];
+  let searchResultRepoSuggestList = [];
   inputTimer = setTimeout(() => {
     console.log("inputChanged: " + text);
     if (!text) return;
@@ -45,7 +46,12 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
           });
           searchResultIssueSuggestList.push(...list);
           console.log(list);
-          suggest([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
+          suggest([
+            ...arrSuggest,
+            ...searchResultIssueSuggestList,
+            ...searchResultPRSuggestList,
+            ...searchResultRepoSuggestList,
+          ]);
           console.log([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
         })
         .catch(err => {
@@ -66,7 +72,12 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
           });
           searchResultPRSuggestList.push(...list);
           console.log(list);
-          suggest([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
+          suggest([
+            ...arrSuggest,
+            ...searchResultIssueSuggestList,
+            ...searchResultPRSuggestList,
+            ...searchResultRepoSuggestList,
+          ]);
           console.log([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
         })
         .catch(err => {
@@ -87,9 +98,40 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
               description: `<dim>仓库：</dim><match>${item.name}</match>` + ` 【简介: ${description}】`,
             };
           });
-          setTimeout(() => {
-            suggest([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList, ...list]);
-          }, 500);
+          searchResultRepoSuggestList.push(...list);
+          suggest([
+            ...arrSuggest,
+            ...searchResultIssueSuggestList,
+            ...searchResultPRSuggestList,
+            ...searchResultRepoSuggestList,
+          ]);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      // 成员
+      searchMember(text)
+        .then(result => {
+          let resList = result.data;
+          let list = resList.map(item => {
+            let remark = item.remark;
+            let name = item.name;
+            let userId = item.username;
+            // https://e.gitee.com/oschina/members/trend/kesin
+            return {
+              content: `https://e.gitee.com/oschina/members/trend/${userId}`,
+              description: `<dim>成员：</dim><match>${remark}</match>` + ` 【昵称: ${name}】`,
+            };
+          });
+          setTimeout(function () {
+            suggest([
+              ...arrSuggest,
+              ...searchResultIssueSuggestList,
+              ...searchResultPRSuggestList,
+              ...searchResultRepoSuggestList,
+              ...list,
+            ]);
+          }, 1000);
         })
         .catch(err => {
           console.log(err);
