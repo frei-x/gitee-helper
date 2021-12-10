@@ -1,28 +1,103 @@
+// todo feat: 搜索合并issue、pr 、仓库名、代码， 直接在搜索框列表显示结果， 副标题小字显示类型
+// todo bug: 建议按顺序插入, 显示列表却交叉显示了?
+const enterpressPath = "oschina";
+let inputTimer = null;
 chrome.omnibox.setDefaultSuggestion({
-  description: "输入Issue: 、PR: 、Code: 、New PR、New Issue",
+  description: `在 ${enterpressPath} 中搜索Issue、PR、代码、仓库、里程碑、文档 或 成员`,
 });
 // chrome.omnibox.DescriptionStyleType();
 // chrome.omnibox.setDefaultSuggestion({
 //   description: "默认提示",
 // });
-const enterpressPath = "oschina";
+// 由于浏览器限制， 地址栏备选长度最多为8 - 10 ，edge://flags/#omnibox-ui-max-autocomplete-matches 修改最大 12
 let featKeyword = [
-  { content: "Issue: ", description: "搜索 Issue" },
-  { content: "PR: ", description: "搜索 PR" },
-  { content: "Code: ", description: "搜索 代码" },
-  { content: "New PR", description: "新建 PR" },
-  { content: "New Issue", description: "新建 Issue" },
+  // { content: "Issue: ", description: "搜索 Issue" },
+  // { content: "PR: ", description: "搜索 PR" },
+  // { content: "Code: ", description: "搜索 代码" },
+  // { content: "New PR", description: "新建 PR" },
+  // { content: "New Issue", description: "新建 Issue" },
 ];
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
-  console.log("inputChanged: " + text);
-  if (!text) return;
-  let textLower = text.toLocaleLowerCase();
+  clearTimeout(inputTimer);
   let arrSuggest = featKeyword;
-  if (textLower === "issue") {
-  } else if (textLower === "pr" || textLower === "pull request") {
-  } else {
-  }
-  suggest(arrSuggest);
+  let searchResultIssueSuggestList = [];
+  let searchResultPRSuggestList = [];
+  inputTimer = setTimeout(() => {
+    console.log("inputChanged: " + text);
+    if (!text) return;
+    text = text.toLocaleLowerCase().trim();
+    if (/^https:/i.test(text)) return;
+    // 不符合过滤关键词, 则为聚合搜索
+    if (
+      !featKeyword.some(item => {
+        return item.content.trim() === text;
+      })
+    ) {
+      searchIssue(text)
+        .then(result => {
+          let resList = result.data;
+          let list = resList.map(item => {
+            let assigneeName = item.assignee ? item.assignee.remark || tem.assignee.name : "无负责人";
+            return {
+              content: `https://e.gitee.com/${enterpressPath}/issues/list?issue=${item.ident}`,
+              description: `<dim>Issue：</dim><match>${item.title}</match>` + ` 【负责人: ${assigneeName}】`,
+            };
+          });
+          searchResultIssueSuggestList.push(...list);
+          console.log(list);
+          suggest([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
+          console.log([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      searchPr(text)
+        .then(result => {
+          let resList = result.data;
+          let list = resList.map(item => {
+            let nameSpace = item.project.namespace.path;
+            let repoPath = item.project.path;
+            let PrId = item.iid;
+            let author = item.author.remark || item.author.username;
+            // https://e.gitee.com/${enterpressPath}/repos/${nameSpace}/${repoPath}/pulls/${PrId}
+            let url = `https://e.gitee.com/${enterpressPath}/repos/${nameSpace}/${repoPath}/pulls/${PrId}`;
+            return { content: url, description: `<dim>PR：</dim>${item.title} 【创建者：${author}】` };
+          });
+          searchResultPRSuggestList.push(...list);
+          console.log(list);
+          suggest([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
+          console.log([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      // 仓库
+      searchRepo(text)
+        .then(result => {
+          let resList = result.data;
+          let list = resList.map(item => {
+            let namespace = item.namespace.path;
+            let repoPath = item.path;
+            let description = item.description ? item.description : "暂无简介";
+            // /oschina/repos/oschina/openharmony-2021
+            return {
+              content: `https://e.gitee.com/${enterpressPath}/repos/${namespace}/${repoPath}`,
+              description: `<dim>仓库：</dim><match>${item.name}</match>` + ` 【简介: ${description}】`,
+            };
+          });
+          setTimeout(() => {
+            suggest([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList, ...list]);
+          }, 500);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }, 450);
+
+  //suggest([...arrSuggest, ...searchResultIssueSuggestList, ...searchResultPRSuggestList]);
 });
 
 chrome.omnibox.onInputEntered.addListener((text, disposition) => {
@@ -32,18 +107,18 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
   let url = "";
 
   if (/^Issue:/i.test(text)) {
-    url = `https://gitee.com/${enterpressPath}/gitee/issues?issue_search=${text.replace(/^Issue:/i, "")}`;
+    url = `https://gitee.com/${enterpressPath}/gitee/issues?issue_search=${text.replace(/^Issue:/i, "").trim()}`;
     // url = `https://e.gitee.com/${enterpressPath}/search?q=${text.replace("Issue: ", "")}&type=issue`;
   } else if (/^PR:/i.test(text)) {
-    url = `https://e.gitee.com/${enterpressPath}/code/pulls?pr[search]=${text.replace(/^PR:/i, "")}&page=1`;
+    url = `https://e.gitee.com/${enterpressPath}/code/pulls?pr[search]=${text.replace(/^PR:/i, "").trim()}&page=1`;
   } else if (/^Code:/i.test(text)) {
-    url = `https://e.gitee.com/${enterpressPath}/search?q=${text.replace(/^Code:/i, "")}&type=code`;
+    url = `https://e.gitee.com/${enterpressPath}/search?q=${text.replace(/^Code:/i, "").trim()}&type=code`;
   } else if (/^New Issue/i.test(text)) {
     url = `https://e.gitee.com/${enterpressPath}/dashboard?issue=new`;
   } else if (/^New PR/i.test(text)) {
     url = `https://e.gitee.com/${enterpressPath}/code/pulls/new`;
   } else {
-    url = `https://e.gitee.com/${enterpressPath}/search?q=${text.replace(/^Issue:/i, "")}&type=issue`;
+    url = text.trim();
   }
   switch (disposition) {
     case "currentTab":
