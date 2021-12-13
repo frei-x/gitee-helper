@@ -33,8 +33,15 @@
     //     "resources": ["./css/dark.css"],
     //     "matches": ["https://gitee.com/*"]
     //   }],
-    "icons": {},
     "omnibox": { "keyword" : "gitee" },
+    "icons": {
+        "16": "img/16@1x.png",
+        "24": "img/24@1x.png",
+        "48": "img/48@1x.png",
+        "64": "img/64@1x.png",
+        "128": "img/128@1x.png",
+        "200": "img/200@1x.png"
+      },
     "permissions": [
         "tabs",
         "notifications",
