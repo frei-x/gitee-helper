@@ -104,27 +104,23 @@ const searchPr = text => {
   });
 };
 
-
 // 搜索仓库
-const searchRepo = (text) => {
+const searchRepo = text => {
   // https://api.gitee.com/enterprises/1/projects?page=1&per_page=20&search=1
   text = text ? text.trim() : "";
-  return fetch(
-    `https://api.gitee.com/enterprises/${enterpressId}/projects?page=1&per_page=2&search=${text}`,
-    {
-      headers: {
-        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        referer: "https://e.gitee.com/",
-      },
-      method: "GET",
-      credentials: "include",
-    }
-  ).then(res => {
+  return fetch(`https://api.gitee.com/enterprises/${enterpressId}/projects?page=1&per_page=2&search=${text}`, {
+    headers: {
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      referer: "https://e.gitee.com/",
+    },
+    method: "GET",
+    credentials: "include",
+  }).then(res => {
     return res.json();
   });
-}
+};
 
-const searchMember = (text) => {
+const searchMember = text => {
   // https://api.gitee.com/enterprises/1/members?page=1&per_page=20&search=%E5%88%98&is_block=0
   text = text ? text.trim() : "";
   return fetch(
@@ -140,4 +136,6 @@ const searchMember = (text) => {
   ).then(res => {
     return res.json();
   });
-}
+};
+
+export { getToken, markNotice, getNotices, searchRepo, searchMember, searchPr, searchIssue };

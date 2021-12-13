@@ -7,10 +7,7 @@
     // "options_page": "html/options.html",
     "background": {
         "scripts": [
-            "js/tool/api.js",
-            "js/tool/eventBus.js",
-            "js/background.js",
-            "js/omnibox.js"
+            "js/gitee-helper-background.js"
         ],
         "persistent": true
     },
@@ -25,7 +22,7 @@
                 "https://gitee.com/*"
             ],
             "js": [
-                "js/insert-community.js"
+                "js/gitee-helper-insert-community.js"
             ],
             "css":["css/dark.css"],
             "run_at": "document_end"

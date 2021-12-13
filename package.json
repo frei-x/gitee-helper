@@ -1,0 +1,27 @@
+{
+  "name": "gitee-helper",
+  "version": "2021.12.11",
+  "description": "gitee 助手, gitee.com 辅助扩展程序",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js  --mode production",
+    "dev": "webpack serve --open --config webpack.config.js --mode development",
+    "watch": "webpack --watch --mode=production"
+  },
+  "keywords": [
+    "Chrome 插件",
+    "chrome extension",
+    "gitee",
+    "插件"
+  ],
+  "author": "javascript.h@qq.com",
+  "license": "MulanPSL-2.0",
+  "devDependencies": {
+    "copy-webpack-plugin": "^10.1.0",
+    "css-loader": "^6.4.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.59.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1"
+  }
+}

@@ -96,3 +96,5 @@ eventBus.on = function (eventName, callback = function () {}) {
   }
   this._eventPublicCheckArgType.call(this, eventName, funAddon);
 };
+
+export default eventBus;

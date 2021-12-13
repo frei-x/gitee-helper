@@ -26,6 +26,10 @@
 //     });
 //   }
 // });
+
+import "./bg-omnibox.js";
+
+import { markNotice, getNotices } from "./tool/api";
 const sendNotification = function ({ message, url, updated_at, messageId }, btnText) {
   const opt = {
     type: "basic",
@@ -109,7 +113,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 // onUpdated在页面初始化时不会执行(刷新页面), url改变才执行
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  console.log(changeInfo);
   if (!changeInfo.url || changeInfo.url.indexOf("#") > -1) return;
   if (changeInfo.url) {
     chrome.tabs.sendMessage(tabId, {
