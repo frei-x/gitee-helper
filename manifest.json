@@ -4,10 +4,10 @@
     "version_name": "0.1.0",
     "description": "gitee 助手",
     "homepage_url": "https://gitee.com/stringify/gitee-helper",
-    // "options_page": "html/options.html",
+    // v3 教程 https://blog.shahednasser.com/chrome-extension-tutorial-migrating-to-manifest-v3-from-v2/
     "background": {
         "scripts": [
-            "js/gitee-helper-background.js"
+            "background.js"
         ],
         "persistent": true
     },
@@ -15,25 +15,30 @@
         "default_title": "gitee helper 配置",
         "default_popup": "html/options.html"
     },
-    // 注入页面的js
     "content_scripts": [
         {
             "matches": [
                 "https://gitee.com/*"
             ],
             "js": [
-                "js/gitee-helper-insert-community.js"
+                "js/insert-community.js"
             ],
-            "css":["css/dark.css"],
+            "css": [
+                "css/dark.css"
+            ],
             "run_at": "document_end"
         }
     ],
-    "web_accessible_resources": ["css/dark.css", "img/download.svg"],
-    // "web_accessible_resources": [{
-    //     "resources": ["./css/dark.css"],
-    //     "matches": ["https://gitee.com/*"]
-    //   }],
-    "omnibox": { "keyword" : "gitee" },
+    "web_accessible_resources": [
+        "css/dark.css",
+        "img/download.svg",
+        "./background.js.map",
+        "./js/insert-community.js.map",
+        "./js/popup.js.map"
+    ],
+    "omnibox": {
+        "keyword": "gitee"
+    },
     "icons": {
         "16": "img/16@1x.png",
         "24": "img/24@1x.png",
@@ -41,15 +46,19 @@
         "64": "img/64@1x.png",
         "128": "img/128@1x.png",
         "200": "img/200@1x.png"
-      },
+    },
+    // "host_permissions": [
+    //     "https://*.gitee.com/*"
+    // ],
     "permissions": [
+        "https://*.gitee.com/*",
         "tabs",
         "notifications",
         "webNavigation",
-        "https://*.gitee.com/*",
         "storage",
         "downloads"
     ],
     "incognito": "split",
+    // v3 目前还存在很多问题 omnibox无法使用 https://bugs.chromium.org/p/chromium/issues/detail?id=1186804 
     "manifest_version": 2
 }
