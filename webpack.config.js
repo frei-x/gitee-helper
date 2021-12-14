@@ -3,16 +3,16 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
   mode: "production", // development
   entry: {
-    background: "./js/background.js",
-    "insert-community": "./js/insert-community.js",
-    popup: "./js/popup.js",
+    "./background": "./js/background.js",
+    "./js/insert-community": "./js/insert-community.js",
+    "./js/popup": "./js/popup.js",
   },
-  devtool: "source-map",
+  devtool: "inline-source-map",
   output: {
     // "[name].[hash].bundle.js"
-    filename: "js/gitee-helper-[name].js", //打包后js的名称 此选项决定了每个输出 bundle 的名称。这些 bundle 将写入到 output.path 选项指定的目录下。
-    path: path.resolve(__dirname, "dist"), //打包输出到当前路径的build文件夹中
-    publicPath: "/", // 服务器下资源引用的根目录
+    filename: "[name].js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
     clean: true,
   },
   module: {
