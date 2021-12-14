@@ -1,5 +1,8 @@
-// todo 自动获取用户企业名称、企业路径和企业id
-const enterpressId = "1";
+import { getStorage } from "../utils/storage";
+let enterpressId = "1";
+getStorage("select-enterprises").then(result => {
+  enterpressId = result.id || "1";
+});
 const getToken = () => {
   return new Promise((resolve, reject) => {
     fetch(`https://gitee.com/login_state`, {
@@ -138,4 +141,17 @@ const searchMember = text => {
   });
 };
 
-export { getToken, markNotice, getNotices, searchRepo, searchMember, searchPr, searchIssue };
+const getEnterpriseList = () => {
+  return fetch(`https://api.gitee.com/enterprises/basic_info`, {
+    headers: {
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      referer: "https://e.gitee.com/",
+    },
+    method: "GET",
+    credentials: "include",
+  }).then(res => {
+    return res.json();
+  });
+};
+
+export { getToken, markNotice, getNotices, searchRepo, searchMember, searchPr, searchIssue, getEnterpriseList };

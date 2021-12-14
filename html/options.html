@@ -15,18 +15,25 @@
         box-sizing: border-box;
       }
 
+      select {
+        display: block;
+        height: 24px;
+        line-height: 24px;
+        font-size: 14px;
+        width: 100px;
+      }
+
       .gitee-helper-popup {
         color: #fff;
-        padding: 16px 24px;
+        padding: 16px 16px;
         box-sizing: border-box;
       }
 
       .option-item {
         font-size: 14px;
+        white-space: nowrap;
         display: flex;
         align-items: center;
-        justify-content: center;
-        white-space: nowrap;
       }
 
       .option-item__btn {
@@ -42,12 +49,13 @@
   <body>
     <div class="gitee-helper-popup">
       <div class="option-item">
-        <!-- <div class="option-item__title">暗黑主题</div>
-        <button class="option-item__btn option_dark_theme_btn" data-enable="1">已关闭</button> -->
+        <div class="option-item__title"> 选择您常用的企业：</div>
+        <select id="select-enterprises" name="enterprises-name">
+        </select>
       </div>
 
     </div>
   </body>
-  <script src="../js/popup.js"></script>
+  <script src="/js/popup.js"></script>
 
 </html>
