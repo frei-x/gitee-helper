@@ -9,7 +9,8 @@
 ### 使用方法
 1. `git clone git@gitee.com:stringify/gitee-helper.git`
 2. 浏览器打开开发者模式
-3. 点击 '加载已解压缩的扩展', 选择本仓库文件夹
+3. 点击 '加载已解压缩的扩展', 构建后选择dist文件夹, 或者下载发行版
+https://gitee.com/stringify/gitee-helper/releases/2021.12.16
 4. 选择自己的常用企业：
  ![输入图片说明](example-img/select-enterprises.png)
 5. 完成
@@ -36,7 +37,7 @@
  触发方式：地址栏输入 `gitee` 按下 tab键 (或按空格)
 不输入指令时, 会同时搜索 issue PR 仓库 和成员。
 |指令|示例|效果|指令匹配的正则|
-|---|---|---|---|
+|---|---|---|--------|
 |空指令 |`任意内容`|聚合搜索 issue、PR、仓库、成员|无|
 |Issue: |`issue: bug`|搜索 issue|`/^(Issue|任务):/i`|
 |PR: |`pr: name`|搜索 PR|`/^(PR|pull request):/`|
