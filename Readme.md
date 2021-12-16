@@ -46,6 +46,8 @@
 |New Issue|`new issue、新建任务`|新建 issue|`/^(New Issue|新建任务):/i`|
 |New PR|`new pr、新建评审`|新建 PR, 查看差异|`/^(New PR|新建评审):/i`|
 |New Project|`new project`|新建仓库|`/^(New Project|New Repo|新建仓库):/i`|
+![搜索效果](img/search-example.png)
+
 ### 开发 && 手动构建
 
 安装依赖

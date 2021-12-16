@@ -19,7 +19,7 @@ import { getStorage } from "./utils/storage";
   let inputTimer = null;
   let suggestList = [];
   chrome.omnibox.setDefaultSuggestion({
-    description: `在 ${storageEntInfo.name || "oschina"} 中搜索Issue、PR、代码、仓库、里程碑、文档 或 成员`,
+    description: `在 ${storageEntInfo.name || "oschina"} 中搜索Issue、PR、代码、仓库、或 成员，指定搜索范围请输入指令`,
   });
   // 由于浏览器限制， 地址栏备选长度最多为8 - 10 ，edge://flags/#omnibox-ui-max-autocomplete-matches 修改最大 12
   let featKeyword = [
@@ -176,6 +176,47 @@ import { getStorage } from "./utils/storage";
         createDocList({ text, len: 2, suggest });
       } else {
         // 聚合搜索
+        // let test = [
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description: `<dim>Issue：</dim><match>需要解决无限循环问题</match>` + ` 【负责人: ${"小明"}】`,
+        //   },
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description: `<dim>Issue：</dim><match>$三天后消灭王莽</match>` + ` 【负责人: ${"刘秀"}】`,
+        //   },
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description: `<dim>Issue：</dim><match>编辑dsl文件，支持command+/注释</match>` + ` 【负责人: ${"李世民"}】`,
+        //   },
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description:
+        //       `<dim>PR：</dim><match>make lfounroll handle loops with non-constant trip count </match>` + ` 【创建者: 孔子】`,
+        //   },
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description: `<dim>PR：</dim><match>增加Dockerfile文件和修复时间线bug </match>` + ` 【创建者: 乔布斯】`,
+        //   },
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description: `<dim>仓库：</dim><match>dgiot</match>` + ` 【简介: 轻量级物联网开源平台，30分钟快速部署，千万级设备承载、电信级稳定性。】`,
+        //   },
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description: `<dim>仓库：</dim><match>BootstrapAdmin</match>` + ` 【简介: 基于 RBAC 的 NetCore 后台管理框架】`,
+        //   },
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description: `<dim>成员：</dim><match>林克</match>` + ` 【昵称: 风之勇者】`,
+        //   },
+        //   {
+        //     content: `哈` + Date.now() + Math.random() * 100,
+        //     description: `<dim>文档：</dim><match>旅行日记,  xxxxx</match>` + ` 【更新时间: 2021-11-12 18:29}】`,
+        //   },
+        // ];
+        // console.log(test);
+        // suggest(test);
         createIssueList({ text, len: 3, suggest });
         createPRList({ text, len: 2, suggest });
         createRepoList({ text, len: 2, suggest });
