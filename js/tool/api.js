@@ -1,7 +1,7 @@
 import { getStorage } from "../utils/storage";
 let enterpressId = "1";
 getStorage("select-enterprises").then(result => {
-  enterpressId = result.id || "1";
+  result && (enterpressId = result.id || "1");
 });
 const getToken = () => {
   return new Promise((resolve, reject) => {
@@ -73,10 +73,10 @@ const markNotice = async function (id) {
 // 搜索里程碑
 // 搜索文档
 // 搜索成员
-const searchIssue = text => {
+const searchIssue = (text, len = 3) => {
   text = text ? text.trim() : "";
   return fetch(
-    `https://api.gitee.com/enterprises/${enterpressId}/issues/as_tree?page=1&per_page=3&search=${text}&sort=created_at&parent_id=0`,
+    `https://api.gitee.com/enterprises/${enterpressId}/issues/as_tree?page=1&per_page=${len}&search=${text}&sort=created_at&parent_id=0`,
     {
       headers: {
         "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -90,10 +90,10 @@ const searchIssue = text => {
   });
 };
 
-const searchPr = text => {
+const searchPr = (text, len = 2) => {
   text = text ? text.trim() : "";
   return fetch(
-    `https://api.gitee.com/enterprises/${enterpressId}/pull_requests?page=1&per_page=2&search=${text}&sort=created_at`,
+    `https://api.gitee.com/enterprises/${enterpressId}/pull_requests?page=1&per_page=${len}&search=${text}&sort=created_at`,
     {
       headers: {
         "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -108,10 +108,10 @@ const searchPr = text => {
 };
 
 // 搜索仓库
-const searchRepo = text => {
+const searchRepo = (text, len) => {
   // https://api.gitee.com/enterprises/1/projects?page=1&per_page=20&search=1
   text = text ? text.trim() : "";
-  return fetch(`https://api.gitee.com/enterprises/${enterpressId}/projects?page=1&per_page=2&search=${text}`, {
+  return fetch(`https://api.gitee.com/enterprises/${enterpressId}/projects?page=1&per_page=${len}&search=${text}`, {
     headers: {
       "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
       referer: "https://e.gitee.com/",
@@ -123,11 +123,25 @@ const searchRepo = text => {
   });
 };
 
-const searchMember = text => {
+const searchMember = (text, len) => {
   // https://api.gitee.com/enterprises/1/members?page=1&per_page=20&search=%E5%88%98&is_block=0
   text = text ? text.trim() : "";
+  return fetch(`https://api.gitee.com/enterprises/${enterpressId}/members?page=1&per_page=${len}&search=${text}`, {
+    headers: {
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      referer: "https://e.gitee.com/",
+    },
+    method: "GET",
+    credentials: "include",
+  }).then(res => {
+    return res.json();
+  });
+};
+const searchDoc = (text, len = 10) => {
+  // 'https://api.gitee.com/enterprises/1/doc_nodes/search?page=1&search=文档&scope=root&sort=updated_at'
+  text = text ? text.trim() : "";
   return fetch(
-    `https://api.gitee.com/enterprises/${enterpressId}/members?page=1&per_page=2&search=${text}&is_block=0`,
+    `https://api.gitee.com/enterprises/${enterpressId}/doc_nodes/search?page=1&per_page=${len}&search=${text}&scope=root&sort=updated_at`,
     {
       headers: {
         "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -140,7 +154,6 @@ const searchMember = text => {
     return res.json();
   });
 };
-
 const getEnterpriseList = () => {
   return fetch(`https://api.gitee.com/enterprises/basic_info`, {
     headers: {
@@ -154,4 +167,14 @@ const getEnterpriseList = () => {
   });
 };
 
-export { getToken, markNotice, getNotices, searchRepo, searchMember, searchPr, searchIssue, getEnterpriseList };
+export {
+  getToken,
+  markNotice,
+  getNotices,
+  searchRepo,
+  searchMember,
+  searchPr,
+  searchIssue,
+  getEnterpriseList,
+  searchDoc,
+};
