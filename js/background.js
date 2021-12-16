@@ -28,7 +28,7 @@
 // });
 
 import "./bg-omnibox.js";
-
+import { getStorage } from "./utils/storage";
 import { markNotice, getNotices } from "./tool/api";
 const sendNotification = function ({ message, url, updated_at, messageId }, btnText) {
   const opt = {
@@ -119,4 +119,11 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
       type: "url-change",
     });
   }
+});
+
+// 首次安装
+chrome.runtime.onInstalled.addListener(async () => {
+  let storageEntInfo = await getStorage("select-enterprises");
+  console.log(storageEntInfo);
+  !storageEntInfo && chrome.tabs.create({ url: "html/options.html", active: false }, tab => {});
 });

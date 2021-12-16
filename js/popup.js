@@ -11,7 +11,7 @@ import { getStorage, setStorage } from "./utils/storage";
     const currentSelect = options[selectedIndex];
     const { path, name, id } = currentSelect.dataset;
     setStorage("select-enterprises", { path, name, id }).then(result => {
-      // 重启 避免重复去读取配置
+      // 直接重启 避免重复去读取配置
       chrome.runtime.reload();
     });
   });
@@ -28,6 +28,20 @@ import { getStorage, setStorage } from "./utils/storage";
           : ""}>
             ${item.name}
         </option>`;
+      });
+    }
+    // 没有配置过企业, 默认取最高等级
+    if (!storageEntInfo) {
+      let defaultEnt = arr.sort((a, b) => {
+        return b.level - a.level;
+      })[0];
+      if (!defaultEnt || !defaultEnt.path) return;
+      setStorage("select-enterprises", {
+        path: defaultEnt.path,
+        name: defaultEnt.name,
+        id: defaultEnt.id,
+      }).then(result => {
+        chrome.runtime.reload();
       });
     }
     oSelect.innerHTML = template;
