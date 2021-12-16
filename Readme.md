@@ -11,12 +11,12 @@
 2. 浏览器打开开发者模式
 3. 点击 '加载已解压缩的扩展', 选择本仓库文件夹
 4. 选择自己的常用企业：
- ![输入图片说明](img/select-enterprises.png)
+ ![输入图片说明](example-img/select-enterprises.png)
 5. 完成
 ### 暗黑主题
   - 全部页面主题替换为暗黑主题 (企业版除外)
   - 图片不会被影响
-  ![输入图片说明](img/VMZD~U\)6LNFXJ1GN%5D47VF4E.jpg)
+  ![输入图片说明](example-img/VMZD~U\)6LNFXJ1GN%5D47VF4E.jpg)
   如需取消主题, 请注释 `manifest.json`文件中的`"css":["css/dark.css"], `
 ### 桌面消息通知
  - 所有消息通知至桌面
@@ -25,11 +25,11 @@
  - 通知频率为 45s/次
  - 相同通知未被清除, 不会再重复通知
 
-![输入图片说明](img/image.png)
+![输入图片说明](example-img/image.png)
 ### 下载仓库单个文件
 - 仓库目录树右侧添加下载单文件按钮
 - 文件详情页面顶部添加下载按钮
-![输入图片说明](img/example-downlaod.png)
+![输入图片说明](example-img/example-downlaod.png)
 
 
 ### 搜索栏指令
@@ -46,7 +46,7 @@
 |New Issue|`new issue、新建任务`|新建 issue|`/^(New Issue|新建任务):/i`|
 |New PR|`new pr、新建评审`|新建 PR, 查看差异|`/^(New PR|新建评审):/i`|
 |New Project|`new project`|新建仓库|`/^(New Project|New Repo|新建仓库):/i`|
-![搜索效果](img/search-example.png)
+![搜索效果](example-img/search-example.png)
 
 ### 开发 && 手动构建
 
