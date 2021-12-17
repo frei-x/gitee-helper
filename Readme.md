@@ -39,14 +39,14 @@ https://gitee.com/stringify/gitee-helper/releases/2021.12.16
 |指令|示例|效果|指令匹配的正则|
 |---|---|---|--------|
 |空指令 |`任意内容`|聚合搜索 issue、PR、仓库、成员|无|
-|Issue: |`issue: bug`|搜索 issue|`/^(Issue|任务):/i`|
-|PR: |`pr: name`|搜索 PR|`/^(PR|pull request):/`|
-|repo: |`仓库: 仓库名称`|搜索仓库|`/^(Repo|Project|仓库):/i`|
-|doc: |`doc: xxx说明`|搜索文档|`/^(doc|文档|知识库):/i`|
-|Member: |`member: 刘`|搜索成员|`/^(Member|成员|用户):/i`|
-|New Issue|`new issue、新建任务`|新建 issue|`/^(New Issue|新建任务):/i`|
-|New PR|`new pr、新建评审`|新建 PR, 查看差异|`/^(New PR|新建评审):/i`|
-|New Project|`new project`|新建仓库|`/^(New Project|New Repo|新建仓库):/i`|
+|Issue: |`issue: bug`|搜索 issue|`/^(Issue\|任务):/i`|
+|PR: |`pr: name`|搜索 PR|`/^(PR\|pull request):/`|
+|repo: |`仓库: 仓库名称`|搜索仓库|`/^(Repo\|Project\|仓库):/i`|
+|doc: |`doc: xxx说明`|搜索文档|`/^(doc\|文档\|知识库):/i`|
+|Member: |`member: 刘`|搜索成员|`/^(Member\|成员\|用户):/i`|
+|New Issue|`new issue`|新建 issue|`/^(New Issue\|新建任务):/i`|
+|New PR|`new pr`|新建 PR, 查看差异|`/^(New PR\|新建评审):/i`|
+|New Project|`new project`|新建仓库|`/^(New Project\|New Repo\|新建仓库):/i`|
 
 
 ![搜索效果](example-img/search-example.png)
