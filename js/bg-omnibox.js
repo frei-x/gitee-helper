@@ -37,7 +37,10 @@ import { getStorage } from "./utils/storage";
           let assigneeName = item.assignee ? item.assignee.remark || item.assignee.name : "无负责人";
           return {
             content: `https://e.gitee.com/${enterpressPath}/issues/list?issue=${item.ident}`,
-            description: `<dim>Issue：</dim><match>${item.title}</match>` + ` 【负责人: ${assigneeName}】`,
+            description: `<dim>Issue：</dim><match>${item.title.replace(
+              /[\b\n\r\f\\]/g,
+              ""
+            )}</match> 【负责人: ${assigneeName}】`,
           };
         });
         suggestList.push(...list);
@@ -77,7 +80,8 @@ import { getStorage } from "./utils/storage";
           let description = item.description ? item.description : "暂无简介";
           return {
             content: `https://e.gitee.com/${enterpressPath}/repos/${namespace}/${repoPath}`,
-            description: `<dim>仓库：</dim><match>${item.name}</match>` + ` 【简介: ${description}】`,
+            description:
+              `<dim>仓库：</dim><match>${item.name.replace(/[\b\n\r\f\\]/g, "")}</match>` + ` 【简介: ${description}】`,
           };
         });
         suggestList.push(...list);
@@ -97,7 +101,7 @@ import { getStorage } from "./utils/storage";
           let userId = item.username;
           return {
             content: `https://e.gitee.com/${enterpressPath}/members/trend/${userId}`,
-            description: `<dim>成员：</dim><match>${remark}</match>` + ` 【昵称: ${name}】`,
+            description: `<dim>成员：</dim><match>${remark.replace(/[\b\n\r\f\\]/g, "")}</match>` + ` 【昵称: ${name}】`,
           };
         });
         suggestList.push(...list);
@@ -122,7 +126,8 @@ import { getStorage } from "./utils/storage";
             // doc_id  info_id  id
             // /docs/816085/file/1921347?sub_id=4975935
             content: `https://e.gitee.com/${enterpressPath}/docs/${doc_id}/file/${info_id}?sub_id=${id}`,
-            description: `<dim>文档：</dim><match>${name}</match>` + ` 【更新时间: ${update_time}】`,
+            description:
+              `<dim>文档：</dim><match>${name.replace(/[\b\n\r\f\\]/g, "")}</match>` + ` 【更新时间: ${update_time}】`,
           };
         });
         console.log(list);
