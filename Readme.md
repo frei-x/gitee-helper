@@ -7,10 +7,9 @@
 - 企业搜索栏指令
 - 无需提供账号密码 token 等信息
 ### 使用方法
-1. `git clone git@gitee.com:stringify/gitee-helper.git`
+1. 下载发行版解压出文件夹 `https://gitee.com/stringify/gitee-helper/releases`
 2. 浏览器打开开发者模式
-3. 点击 '加载已解压缩的扩展', 构建后选择dist文件夹, 或者下载发行版
-https://gitee.com/stringify/gitee-helper/releases
+3. 点击 '加载已解压缩的扩展', 选择dist文件夹,
 4. 选择自己的常用企业：
  ![输入图片说明](example-img/select-enterprises.png)
 5. 完成
