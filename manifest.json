@@ -2,7 +2,6 @@
     "name": "gitee 助手",
     "version": "0.1.1",
     "version_name": "v2021.12.21",
-    "lang": "zh-CN",
     "description": "gitee 助手。gitee.com 浏览器插件， 支持暗黑主题、桌面消息通知、下载仓库单个文件、搜索栏指令。 安装直接使用，无需提供账号密码等信息。",
     "homepage_url": "https://gitee.com/stringify/gitee-helper",
     // v3 教程 https://blog.shahednasser.com/chrome-extension-tutorial-migrating-to-manifest-v3-from-v2/

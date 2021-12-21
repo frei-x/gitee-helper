@@ -170,17 +170,17 @@ import { getStorage } from "./utils/storage";
         // 仓库
         suggestList = [];
         text = text.replace(reSearchRepo, "").trim();
-        createRepoList({ text, len: 2, suggest });
+        createRepoList({ text, len: 10, suggest });
       } else if (reSearchMember.test(text)) {
         // 成员
         suggestList = [];
         text = text.replace(reSearchMember, "").trim();
-        createMemberList({ text, len: 2, suggest });
+        createMemberList({ text, len: 10, suggest });
       } else if (reSearchDoc.test(text)) {
         // 文档
         suggestList = [];
         text = text.replace(reSearchDoc, "").trim();
-        createDocList({ text, len: 2, suggest });
+        createDocList({ text, len: 10, suggest });
       } else {
         // 聚合搜索
         // let test = [
