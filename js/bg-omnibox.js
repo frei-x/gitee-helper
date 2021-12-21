@@ -78,10 +78,12 @@ import { getStorage } from "./utils/storage";
           let namespace = item.namespace.path;
           let repoPath = item.path;
           let description = item.description ? item.description : "暂无简介";
+          let createUserName = item.creator.remark || item.creator.username;
           return {
             content: `https://e.gitee.com/${enterpressPath}/repos/${namespace}/${repoPath}`,
             description:
-              `<dim>仓库：</dim><match>${item.name.replace(/[\b\n\r\f\\]/g, "")}</match>` + ` 【简介: ${description}】`,
+              `<dim>仓库：</dim><match>${item.name.replace(/[\b\n\r\f\\]/g, "")}</match>` +
+              ` 【简介: ${description}】【创建者：${createUserName}】`,
           };
         });
         suggestList.push(...list);
