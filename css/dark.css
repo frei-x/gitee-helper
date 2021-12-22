@@ -3,7 +3,7 @@ body {
   background-color: rgb(221, 216, 209) !important;
 } */
 html {
-  filter: invert(0.88) hue-rotate(180deg) brightness(1.15);
+  filter: invert(0.88) hue-rotate(180deg) brightness(1.4);
 }
 img,
 .bottombar,
