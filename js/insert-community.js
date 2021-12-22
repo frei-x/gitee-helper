@@ -1,3 +1,5 @@
+import { insertFileIcon } from "./insert-file-icon.js";
+
 // 部分dom为js插入, 延迟方便调整结构和样式
 function createImgBtn ({ isBlobpage } = {}) {
   const downloadImgURL = chrome.extension.getURL("img/download.svg");
@@ -37,20 +39,34 @@ function insertBlobPageDownBtn () {
   buttonWrapper.insertAdjacentElement("afterbegin", createImgBtn({ isBlobpage: true }));
 }
 function insertDownloadbtn () {
-  setTimeout(() => {
-    insertBlobPageDownBtn();
-    insertTreeDownbtn();
-  }, 800);
+  insertBlobPageDownBtn();
+  insertTreeDownbtn();
 }
 
 insertDownloadbtn();
-
+insertFileIcon();
 // 监听页面URL变化 (dom被刷掉, 但是页面未重载)
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === "url-change") {
     insertDownloadbtn();
+    insertFileIcon();
   }
 });
+// dom 变化时 重新插入, 不存在才插入一次, 否则会导致无限递归
+if (document.querySelector("#tree-holder")) {
+  let observerTargetDom = new MutationObserver(() => {
+    if (!document.querySelector(".gitee-helper-icon")) {
+      insertFileIcon();
+    }
+    if (!document.querySelector(".gitee-helper-download-img")) {
+      insertDownloadbtn();
+    }
+  });
+  observerTargetDom.observe(document.querySelector("#tree-holder"), {
+    childList: true,
+    subtree: true,
+  });
+}
 
 document.body.addEventListener(
   "click",

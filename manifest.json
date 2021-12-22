@@ -27,8 +27,8 @@
                 "js/insert-community.js"
             ],
             "css": [
-                "css/file-icon.css"
-                // "css/dark.css"
+                "css/file-icon.css",
+                "css/dark.css"
             ],
             "run_at": "document_end"
         }
