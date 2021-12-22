@@ -8,7 +8,7 @@ function insertFileIcon () {
   const treeItemFileNameParent = oTree.querySelectorAll(".tree-item[data-type=file] .tree-item-file-name");
   treeItemFileNameParent.length &&
     treeItemFileNameParent.forEach(node => {
-      const oIcon = node.querySelector(".iconfont.icon-file");
+      const oIcon = node.querySelector(".iconfont");
       if (oIcon) {
         let fileName = node.querySelector("a").innerText || node.querySelector("a").title;
         let iconClass = getClassWithColor(fileName) || "iconfont icon-file";
