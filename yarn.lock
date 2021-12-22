@@ -859,6 +859,11 @@ faye-websocket@^0.11.3:
   dependencies:
     websocket-driver ">=0.5.1"
 
+file-icons-js@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/file-icons-js/-/file-icons-js-1.1.0.tgz#da5e0679a58ab661abf9ec6c2a47c5f14f638ab6"
+  integrity sha512-EwR5RJoNIp5Wnzc+AF1oyBYZhOqPuPm0QHzfCaeh5KJpLB5lWIsxswiAwj3m8lIj7ddBzYBJDDnIr6IVrRCy8Q==
+
 fill-range@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-7.0.1.tgz#1919a6a7c75fe38b2c7c77e5198535da9acdda40"
