@@ -8,12 +8,16 @@
 - 搜索栏指令 (通过地址栏快速搜索企业内容)
 - 无需提供账号密码 token 等信息
 ### 使用方法
-1. 下载发行版解压出文件夹 `https://gitee.com/stringify/gitee-helper/releases`
+- 方法一:
+ edge 浏览器可从微软edge商店下载 https://microsoftedge.microsoft.com/addons/detail/gitee-%E5%8A%A9%E6%89%8B/ekejgcnbbjmokhhfeklchflilecboajp
+(审核较慢, 可能不是最新版本)
+- 方法二: 使用发行版
+1. 下载发行版解压出文件夹 https://gitee.com/stringify/gitee-helper/releases
 2. 浏览器打开开发者模式
 3. 点击 '加载已解压缩的扩展', 选择dist文件夹,
-4. 选择自己的常用企业：
+
+添加完成,  选择自己的常用企业：
  ![输入图片说明](example-img/select-enterprises.png)
-5. 完成
 ### 暗黑主题
   - 全部页面主题替换为暗黑主题 (企业版除外)
   - 图片不会被影响
