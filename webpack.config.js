@@ -33,6 +33,8 @@ module.exports = {
         { from: "img/", to: "img/", toType: "dir" },
         { from: "html", to: "html", toType: "dir" },
         { from: "css", to: "css", toType: "dir" },
+        // { from: "node_modules/file-icons-js/css/style.css", to: "css/file-icon.css" },
+        { from: "node_modules/file-icons-js/fonts/", to: "fonts/", toType: "dir" },
       ],
     }),
   ],

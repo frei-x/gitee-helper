@@ -27,14 +27,16 @@
                 "js/insert-community.js"
             ],
             "css": [
-                "css/dark.css"
+                "css/file-icon.css"
+                // "css/dark.css"
             ],
             "run_at": "document_end"
         }
     ],
     "web_accessible_resources": [
-        "css/dark.css",
+        "css/*",
         "img/download.svg",
+        "fonts/*",
         "./background.js.map",
         "./js/insert-community.js.map",
         "./js/popup.js.map"
