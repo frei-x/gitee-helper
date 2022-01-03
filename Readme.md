@@ -61,6 +61,7 @@ tip: Chrome 请启用硬件加速。
 ![搜索效果](example-img/search-example.png)
 
 ### 开发 && 手动构建
+使用 yarn 或者 npm
 
 安装依赖
 ```bash
