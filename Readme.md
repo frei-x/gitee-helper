@@ -10,7 +10,7 @@
 ### 使用方法
 - 方法一:
  edge 浏览器可从微软edge商店下载 https://microsoftedge.microsoft.com/addons/detail/gitee-%E5%8A%A9%E6%89%8B/ekejgcnbbjmokhhfeklchflilecboajp
-(审核较慢, 可能不是最新版本)
+
 - 方法二: 使用发行版
 1. 下载发行版解压出文件夹 https://gitee.com/stringify/gitee-helper/releases
 2. 浏览器打开开发者模式
