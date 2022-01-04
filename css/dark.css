@@ -2,30 +2,32 @@
 body {
   background-color: rgb(221, 216, 209) !important;
 } */
-html {
-  filter: invert(0.88) hue-rotate(180deg) brightness(1.4);
-}
-img,
-.bottombar,
-.explore-header,
-.explore-statistics,
-.jumbotron,
-.ent-feature-box,
-.page-header,
-body:not(#home-index) #git-header-nav {
-  filter: invert(0.88) hue-rotate(180deg) brightness(1.1);
-}
-.navbar-immersive:not(.nav-hanging) *,
-#git-header-nav *,
-.navbar-immersive img,
-.bottombar *,
-.explore-statistics * {
-  filter: none;
-}
-.logo-img {
-  filter: none;
-}
-img {
-  border: none !important;
-  outline: none !important;
+@media (prefers-color-scheme: dark) {
+  html {
+    filter: invert(0.88) hue-rotate(180deg) brightness(1.4);
+  }
+  img,
+  .bottombar,
+  .explore-header,
+  .explore-statistics,
+  .jumbotron,
+  .ent-feature-box,
+  .page-header,
+  body:not(#home-index) #git-header-nav {
+    filter: invert(0.88) hue-rotate(180deg) brightness(1.1);
+  }
+  .navbar-immersive:not(.nav-hanging) *,
+  #git-header-nav *,
+  .navbar-immersive img,
+  .bottombar *,
+  .explore-statistics * {
+    filter: none;
+  }
+  .logo-img {
+    filter: none;
+  }
+  img {
+    border: none !important;
+    outline: none !important;
+  }
 }
