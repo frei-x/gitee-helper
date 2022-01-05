@@ -10,7 +10,7 @@
 ### 使用方法
 - 方法一:
  edge 浏览器可从微软edge商店下载 https://microsoftedge.microsoft.com/addons/detail/gitee-%E5%8A%A9%E6%89%8B/ekejgcnbbjmokhhfeklchflilecboajp
-(审核较慢, 可能不是最新版本)
+
 - 方法二: 使用发行版
 1. 下载发行版解压出文件夹 https://gitee.com/stringify/gitee-helper/releases
 2. 浏览器打开开发者模式
@@ -18,6 +18,9 @@
 
 添加完成,  选择自己的常用企业：
  ![输入图片说明](example-img/select-enterprises.png)
+
+tip: Chrome 请启用硬件加速。
+
 ### 暗黑主题
   - 全部页面主题替换为暗黑主题 (企业版除外)
   - 图片不会被影响
@@ -58,6 +61,7 @@
 ![搜索效果](example-img/search-example.png)
 
 ### 开发 && 手动构建
+使用 yarn 或者 npm
 
 安装依赖
 ```bash
@@ -77,5 +81,5 @@ yarn run watch
  - [x] 直接显示搜索结果列表
  - [x] 自定义配置常用企业名称
  - [ ] 在浏览器扩展图标添加未阅读消息数
- - [ ] 暗黑主题可配置 (目前不可配置, insertCss() 生效慢)
+ - [ ] 暗黑主题可配置 (目前不可配置, insertCss() 无法提前插入 页面闪现)
  - [x] 仓库文件添加易于识别的图标
