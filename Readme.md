@@ -25,8 +25,6 @@ tip: Chrome 请启用硬件加速。
   - 全部页面主题替换为暗黑主题 (企业版除外)
   - 图片不会被影响
   - gitee 主题随浏览器或者系统的深色模式而启用。
-   [打开edge浏览器深浅色设置](edge://settings/appearance)
-   [打开windows系统深浅色设置](ms-settings:personalization-colors)
   
 ### 桌面消息通知
  - 所有消息通知至桌面
