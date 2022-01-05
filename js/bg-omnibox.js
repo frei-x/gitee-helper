@@ -18,7 +18,8 @@ import { getStorage } from "./utils/storage";
   let enterpressPath = storageEntInfo.path || "oschina";
   let inputTimer = null;
   let suggestList = [];
-  const reSpecialSymbol = /[^\u4e00-\u9fa5\w-]/g;
+  // 插件omnibox列表在xml中存在部分特殊字符时报错 以下符号会被替换
+  const reSpecialSymbol = /[^\u4e00-\u9fa5\w-@$().?!,，！。？\[\]【】]|[#\b\n\r\f]/g;
   chrome.omnibox.setDefaultSuggestion({
     description: `在 ${storageEntInfo.name || "oschina"} 中搜索Issue、PR、代码、仓库、或 成员，指定搜索范围请输入指令`
   });
