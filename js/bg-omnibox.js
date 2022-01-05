@@ -10,7 +10,7 @@ import {
   reNewIssue,
   reNewPR,
   reNewRepo,
-  reSearchDoc,
+  reSearchDoc
 } from "./tool/featKeyWord";
 import { getStorage } from "./utils/storage";
 (async function () {
@@ -19,7 +19,7 @@ import { getStorage } from "./utils/storage";
   let inputTimer = null;
   let suggestList = [];
   chrome.omnibox.setDefaultSuggestion({
-    description: `在 ${storageEntInfo.name || "oschina"} 中搜索Issue、PR、代码、仓库、或 成员，指定搜索范围请输入指令`,
+    description: `在 ${storageEntInfo.name || "oschina"} 中搜索Issue、PR、代码、仓库、或 成员，指定搜索范围请输入指令`
   });
   // 由于浏览器限制， 地址栏备选长度最多为8 - 10 ，edge://flags/#omnibox-ui-max-autocomplete-matches 修改最大 12
   let featKeyword = [
@@ -40,7 +40,7 @@ import { getStorage } from "./utils/storage";
             description: `<dim>Issue：</dim><match>${item.title.replace(
               /[\b\n\r\f\\]/g,
               ""
-            )}</match> 【负责人: ${assigneeName}】`,
+            )}</match> 【负责人: ${assigneeName}】`
           };
         });
         suggestList.push(...list);
@@ -83,7 +83,7 @@ import { getStorage } from "./utils/storage";
             content: `https://e.gitee.com/${enterpressPath}/repos/${namespace}/${repoPath}`,
             description:
               `<dim>仓库：</dim><match>${item.name.replace(/[\b\n\r\f\\]/g, "")}</match>` +
-              ` 【简介: ${description}】【创建者：${createUserName}】`,
+              ` 【简介: ${description}】【创建者：${createUserName}】`
           };
         });
         suggestList.push(...list);
@@ -103,7 +103,7 @@ import { getStorage } from "./utils/storage";
           let userId = item.username;
           return {
             content: `https://e.gitee.com/${enterpressPath}/members/trend/${userId}`,
-            description: `<dim>成员：</dim><match>${remark.replace(/[\b\n\r\f\\]/g, "")}</match>` + ` 【昵称: ${name}】`,
+            description: `<dim>成员：</dim><match>${remark.replace(/[\b\n\r\f\\]/g, "")}</match>` + ` 【昵称: ${name}】`
           };
         });
         suggestList.push(...list);
@@ -116,7 +116,7 @@ import { getStorage } from "./utils/storage";
   const createDocList = ({ text, len, suggest }) => {
     searchDoc(text, len)
       .then(result => {
-        let resList = result.data;
+        let resList = result.data.slice(0, len);
         let list = resList.map(item => {
           let name = item.info_name || item.name;
           let content = item.content;
@@ -128,8 +128,7 @@ import { getStorage } from "./utils/storage";
             // doc_id  info_id  id
             // /docs/816085/file/1921347?sub_id=4975935
             content: `https://e.gitee.com/${enterpressPath}/docs/${doc_id}/file/${info_id}?sub_id=${id}`,
-            description:
-              `<dim>文档：</dim><match>${name.replace(/[\b\n\r\f\\]/g, "")}</match>` + ` 【更新时间: ${update_time}】`,
+            description: `<dim>文档：</dim> ${name.replace(/[\b\n\r\f\\;<>&$*^]/g, "")}` + ` 【更新时间: ${update_time}】`
           };
         });
         console.log(list);
