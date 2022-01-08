@@ -50,7 +50,7 @@ tip: Chrome 请启用硬件加速。
 |---|---|---|--------|
 |空指令 |`任意内容`|聚合搜索 issue、PR、仓库、成员|无|
 |Issue: |`issue: bug`|搜索 issue|`/^(Issue\|任务):/i`|
-|PR: |`pr: name`|搜索 PR|`/^(PR\|pull request):/`|
+|PR: |`pr: name`|搜索 PR|`/^(PR\|pull request):/i`|
 |repo: |`仓库: 仓库名称`|搜索仓库|`/^(Repo\|Project\|仓库):/i`|
 |doc: |`doc: xxx说明`|搜索文档|`/^(doc\|文档\|知识库):/i`|
 |Member: |`member: 刘`|搜索成员|`/^(Member\|成员\|用户):/i`|
