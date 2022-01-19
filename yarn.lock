@@ -446,6 +446,11 @@ chokidar@^3.5.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
+chrome-extension-file-icons-js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/chrome-extension-file-icons-js/-/chrome-extension-file-icons-js-1.0.0.tgz#a48aa1d8cb96117dec1b6f4235189ee08b23761c"
+  integrity sha512-UA/Gmf1fupBtkUy7otJFXJp7SjKQi7MmVsPYU+6jvOqtoYNQCi+RjEwUaetndt5e5J1s6FeoC0Wu+Adw2Dwp8Q==
+
 chrome-trace-event@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
@@ -858,11 +863,6 @@ faye-websocket@^0.11.3:
   integrity sha512-CzbClwlXAuiRQAlUyfqPgvPoNKTckTPGfwZV4ZdAhVcP2lh9KUxJg2b5GkE7XbjKQ3YJnQ9z6D9ntLAlB+tP8g==
   dependencies:
     websocket-driver ">=0.5.1"
-
-file-icons-js@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/file-icons-js/-/file-icons-js-1.1.0.tgz#da5e0679a58ab661abf9ec6c2a47c5f14f638ab6"
-  integrity sha512-EwR5RJoNIp5Wnzc+AF1oyBYZhOqPuPm0QHzfCaeh5KJpLB5lWIsxswiAwj3m8lIj7ddBzYBJDDnIr6IVrRCy8Q==
 
 fill-range@^7.0.1:
   version "7.0.1"

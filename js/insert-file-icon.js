@@ -1,4 +1,4 @@
-import { getClassWithColor, getClass } from "file-icons-js";
+import { getClassWithColor, getClass } from "chrome-extension-file-icons-js";
 // console.log(getClassWithColor("readme.md") + "?" + getClass("readme.md"));
 function insertFileIcon () {
   const isProjectPage = document.querySelector("#project-wrapper");
