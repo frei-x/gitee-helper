@@ -15,8 +15,11 @@
 1. 下载发行版解压出文件夹 https://gitee.com/stringify/gitee-helper/releases
 2. 浏览器打开开发者模式
 3. 点击 '加载已解压缩的扩展', 选择dist文件夹,
+- 方法三: 手动构建
+见文末
 
-添加完成,  选择自己的常用企业：
+选择企业: 
+添加完成,  如果有企业可以选择自己的常用企业：
  ![输入图片说明](example-img/select-enterprises.png)
 
 tip: Chrome 请启用硬件加速。
