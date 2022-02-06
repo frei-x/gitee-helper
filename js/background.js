@@ -51,6 +51,7 @@ const sendNotification = function ({ message, url, updated_at, messageId }, btnT
     console.log(e);
   });
 };
+// 点击桌面消息 查看详情按钮
 chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) => {
   let oInfo = JSON.parse(notificationId);
   let url = oInfo.url || '/';
@@ -58,6 +59,16 @@ chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) =
   chrome.tabs.create({ url: `https://gitee.com${url}`, active: true }, tab => {});
   messageId && markNotice(messageId);
 });
+// 设置未读消息数量, 现在至扩展图标上
+const setUnreadLen = function (num) {
+  if (num) {
+    if (num >= 1000) num = '1k+';
+    chrome.browserAction.setBadgeText({ text: String(num) });
+    chrome.browserAction.setBadgeBackgroundColor({ color: [18, 150, 219, 255] });
+  } else {
+    chrome.browserAction.setBadgeText({ text: '' });
+  }
+};
 const launcher = result => {
   let arr = result.list;
   console.log(result);
@@ -70,7 +81,7 @@ const launcher = result => {
 };
 
 let noticesTimer = null;
-const INTERVAL = 40000;
+const INTERVAL = 15000;
 const getAllNotices = function () {
   Promise.all([getNotices('referer'), getNotices('messages'), getNotices('infos')])
     .then(values => {
@@ -82,6 +93,11 @@ const getAllNotices = function () {
         launcher(values[0]);
         launcher(values[1]);
         launcher(values[2]);
+        let num = values.reduce((sum, value) => {
+          return sum + (value.total_count || 0);
+        }, 0); // initialValue 参数 如果没有提供初始值，则将使用数组中的第一个元素,在没有初始值的空数组上调用 reduce 将报错。
+        // 提供了 initialValue 参数, sum 将不会是第一个元素, value变为从第一个元素开始遍历.
+        setUnreadLen(num);
       }
     })
     .catch(err => {
@@ -101,7 +117,7 @@ const startLoop = () => {
   }, INTERVAL);
 };
 startLoop();
-
+getAllNotices();
 // 支持下载单个文件
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === 'download') {
