@@ -12,9 +12,15 @@ body {
   .explore-statistics,
   .jumbotron,
   .ent-feature-box,
-  .page-header,
+  .page-header {
+    filter: invert(0.88) hue-rotate(180deg) brightness(1.1);
+  }
   body:not(#home-index) #git-header-nav {
     filter: invert(0.88) hue-rotate(180deg) brightness(1.1);
+    background-color: black !important;
+  }
+  body:not(#home-index) #git-header-nav.navbar-immersive {
+    background-color: transparent !important;
   }
   .navbar-immersive:not(.nav-hanging) *,
   #git-header-nav *,
