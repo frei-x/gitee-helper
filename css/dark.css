@@ -4,7 +4,7 @@ body {
 } */
 @media (prefers-color-scheme: dark) {
   html {
-    filter: invert(0.88) hue-rotate(180deg) brightness(1.4);
+    filter: invert(0.88) hue-rotate(180deg) brightness(1.1);
   }
   img,
   .bottombar,
