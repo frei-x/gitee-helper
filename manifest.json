@@ -1,7 +1,7 @@
 {
     "name": "gitee 助手",
-    "version": "0.1.7",
-    "version_name": "v2022.2.26",
+    "version": "0.2.0",
+    "version_name": "v2022.4.09",
     "description": "gitee.com 浏览器插件， 支持暗黑主题、桌面消息通知、下载仓库单个文件、搜索栏指令、文件图标。 安装直接使用，无需提供账号密码等信息。",
     "homepage_url": "https://gitee.com/stringify/gitee-helper",
     // v3 教程 https://blog.shahednasser.com/chrome-extension-tutorial-migrating-to-manifest-v3-from-v2/
@@ -15,7 +15,7 @@
         "default_icon": {
             "24": "img/gitee-fill-round.png"
         },
-        "default_title": "gitee 助手配置",
+        "default_title": "gitee 未读消息",
         "default_popup": "html/options.html"
     },
     "content_scripts": [

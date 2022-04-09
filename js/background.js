@@ -39,7 +39,7 @@ const sendNotification = function ({ message, url, updated_at, messageId }, btnT
     message: message,
     priority: 2, // 优先级，从 -2 到 2，-2 优先级最低，2 最高，默认为零。
     eventTime: new Date(updated_at).getTime(),
-    // requireInteraction: true, // 保持桌面上可见, 除非用户关闭
+    requireInteraction: false, // 保持桌面上可见, 除非用户关闭
     silent: true, // true则不发出声音
     buttons: [
       {
@@ -47,28 +47,44 @@ const sendNotification = function ({ message, url, updated_at, messageId }, btnT
       },
     ],
   };
+  // 创建通知, 并且把通知内容特殊信息存于 notificationId
   chrome.notifications.create(JSON.stringify({ updated_at, url, messageId }), opt, e => {
-    console.log(e);
+    // 加入消息列表后 5s 自动标记已读
+    setTimeout(() => {
+      messageId && markNotice(messageId);
+    }, 5000);
   });
 };
 // 点击桌面消息 查看详情按钮
-chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) => {
+function handleClickSingleMessage (notificationId) {
   let oInfo = JSON.parse(notificationId);
   let url = oInfo.url || "/";
   let messageId = oInfo.messageId;
-  chrome.tabs.create({ url: `https://gitee.com${url}`, active: true }, tab => {});
+  chrome.tabs.create({ url: `https://gitee.com${url}`, active: true }, tab => { });
+  // 并且标记已读
+  messageId && markNotice(messageId);
+}
+// 点击到查看详情按钮
+chrome.notifications.onButtonClicked.addListener(handleClickSingleMessage);
+// 点击到消息
+chrome.notifications.onClicked.addListener(handleClickSingleMessage);
+// 点击到关闭按钮
+chrome.notifications.onClosed.addListener((notificationId) => {
+  console.error('点击了关闭按钮!');
+  let oInfo = JSON.parse(notificationId);
+  let messageId = oInfo.messageId;
   messageId && markNotice(messageId);
 });
 // 设置未读消息数量, 现在至扩展图标上
 // 首次启动时清空数量, 防止残留
 chrome.browserAction.setBadgeText({ text: "" });
 const setUnreadLen = function (num) {
-  if (num) {
+  if (typeof num === 'number') {
     if (num >= 1000) num = "1k+";
     chrome.browserAction.setBadgeText({ text: String(num) });
     chrome.browserAction.setBadgeBackgroundColor({ color: [18, 150, 219, 255] });
   } else {
-    chrome.browserAction.setBadgeText({ text: "" });
+    chrome.browserAction.setBadgeText({ text: num });
   }
 };
 const launcher = result => {
@@ -114,7 +130,8 @@ const startLoop = () => {
       getAllNotices();
       console.count("累计运行次数");
     } else {
-      clearInterval(noticesTimer);
+      // clearInterval(noticesTimer); // 不再清除定时器, 避免免打扰时期, 轮询停止, 数量存在残留
+      setUnreadLen('😴');
     }
   }, INTERVAL);
 };
@@ -144,5 +161,5 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 chrome.runtime.onInstalled.addListener(async () => {
   let storageEntInfo = await getStorage("select-enterprises");
   console.log(storageEntInfo);
-  !storageEntInfo && chrome.tabs.create({ url: "html/options.html", active: false }, tab => {});
+  !storageEntInfo && chrome.tabs.create({ url: "html/options.html", active: false }, tab => { });
 });
